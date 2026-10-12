@@ -2,6 +2,7 @@ name: V3 Nobitex Live Scan
 
 on:
   workflow_dispatch:
+
   schedule:
     - cron: "*/5 * * * *"
 
@@ -9,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  v3-scan:
+  v3-live-scan:
     runs-on: ubuntu-latest
     timeout-minutes: 4
 
@@ -28,19 +29,25 @@ jobs:
       - name: Run V3 Nobitex scan
         shell: bash
         run: |
+          set +e
           timeout 60s python -u main.py
           code=$?
-          if [ "$code" -ne 0 ] && [ "$code" -ne 124 ]; then
-            exit "$code"
+
+          if [ "$code" -eq 124 ]; then
+            echo "V3 scan reached 60-second runtime limit."
+            exit 0
           fi
+
+          exit "$code"
 
       - name: Show latest radar
         if: always()
         shell: bash
         run: |
           echo "===== V3 LATEST RADAR ====="
+
           if [ -f latest_radar.json ]; then
             cat latest_radar.json
           else
-            echo "latest_radar.json was not created"
+            echo "latest_radar.json was not created."
           fi
