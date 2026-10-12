@@ -1,0 +1,39 @@
+name: V3 Nobitex Live Scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  v3-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+
+    steps:
+      - name: Checkout V3
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run V3 Nobitex scan
+        run: timeout 90s python -u main.py || code=$?; if [ "${code:-0}" -ne 0 ] && [ "${code:-0}" -ne 124 ]; then exit "$code"; fi
+
+      - name: Show latest radar
+        if: always()
+        run: |
+          echo "===== V3 LATEST RADAR ====="
+          if [ -f latest_radar.json ]; then
+            cat latest_radar.json
+          else
+            echo "latest_radar.json was not created"
+          fi
