@@ -26,7 +26,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run V3 Nobitex scan
-        run: run: timeout 90s python -u main.py || code=$?; if [ "${code:-0}" -ne 0 ] && [ "${code:-0}" -ne 124 ]; then exit "$code"; fi
+        run:run: timeout 60s python -u main.py || [ $? -eq 124 ]
 
       - name: Show latest radar
         if: always()
