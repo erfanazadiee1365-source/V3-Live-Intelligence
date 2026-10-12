@@ -25,15 +25,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run V3 Nobitex scan
-        run:timeout 60s python -u main.py || [ $? -eq 124 ]
+      - name: Run V3 Live Intelligence
+        run: timeout 60s python -u main.py
 
       - name: Show latest radar
         if: always()
         run: |
-          echo "===== V3 LATEST RADAR ====="
+          echo "===== V3 LIVE INTELLIGENCE RADAR ====="
           if [ -f latest_radar.json ]; then
             cat latest_radar.json
           else
-            echo "latest_radar.json was not created"
+            echo "latest_radar.json was not created."
           fi
