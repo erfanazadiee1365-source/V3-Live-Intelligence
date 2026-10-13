@@ -1,8 +1,9 @@
 {
-  "database": "v3_live_intelligence.sqlite3",
+  "database": "v3_live_intelligence.sqlite",
   "poll_seconds": 300,
   "top_n": 20,
+  "minimum_snapshots": 2,
   "request_timeout": 20,
-"rest_stats_url"  : "https://apiv2.nobitex.ir/market/stats",
+  "rest_stats_url": "https://api2.nobitex.ir/market/stats",
   "quote_currency": "usdt"
 }
