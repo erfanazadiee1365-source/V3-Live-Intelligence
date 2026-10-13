@@ -3,6 +3,6 @@
   "poll_seconds": 300,
   "top_n": 20,
   "request_timeout": 20,
-  "market_stats_url": "https://apiv2.nobitex.ir/market/stats",
+"rest_stats_url"  : "https://apiv2.nobitex.ir/market/stats",
   "quote_currency": "usdt"
 }
