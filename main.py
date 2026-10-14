@@ -176,7 +176,7 @@ async def run():
                              (ts,0,0,gap,0,msg))
             await db.commit()
             print("HEALTH ERROR:",msg)
-          await asyncio.sleep(CFG["poll_seconds"])
+         break
 
 if __name__=="__main__":
     asyncio.run(run())
