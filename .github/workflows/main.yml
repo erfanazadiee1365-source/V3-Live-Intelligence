@@ -7,7 +7,7 @@ on:
     - cron: "*/5 * * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   v3-live-scan:
