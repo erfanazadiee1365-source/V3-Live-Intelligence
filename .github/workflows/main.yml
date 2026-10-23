@@ -39,7 +39,10 @@ jobs:
           fi
 
           exit "$code"
-
+      - name: Run V3 Early Wake
+        shell: bash
+        run: |
+          python -u early_wake.py
       - name: Show latest radar
         if: always()
         shell: bash
